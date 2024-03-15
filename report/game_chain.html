@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>game_chain.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E6%A6%82%E8%BF%B0">概述</h1>
+<p>市场上市值较大的公链起步较早，在新的发展需求下已经略显疲态，通用的做法是在已有的生态下试图用不同的技术弥补现有的不足。</p>
+<p>受限于当年的思想和技术实现，修修补补，虽有局部的一些创新，但很难解决已有的问题，同时兼容已有的技术和社区用户等，创新解决方案越来越复杂。</p>
+<p>新的技术创新的不断涌现，提供了新的机遇，具体分析现有的问题和用户痛点，结合新的解决问题思路，我们提出了自己的解决方案。</p>
+<h2 id="%E9%97%AE%E9%A2%98">问题</h2>
+<p>公链作为金融基础设施，提供基本的数字货币价值支撑，同时承载大量的 dapp，主要面列以下问题。</p>
+<p><strong>问题一</strong>：TPS 问题</p>
+<p>去中心化是底层公链的价值基础，网络传输延迟的限制，制约了区块大小和出块频率，分布式系统状态复制的固有时间复杂度等，造成底层公链 TPS 不高。</p>
+<p><strong>问题二</strong>：手续费问题</p>
+<p>底层公链作为价值所在层，大量的 DApp 交易竞争有限的交易池大小，竞争有限的区块 gaslimit，共享竞价的结果是交易手续费水涨船高。</p>
+<p><strong>问题三</strong>：互操作性问题</p>
+<p>每个区块链网络都有自己的安全和信任机制，有自己的价值。不同网络之间价值和信息的流动，受限于信任假设等，造成安全性问题，进一步加剧了互操作性问题。</p>
+<h2 id="%E5%8F%91%E5%B1%95%E6%A0%BC%E5%B1%80">发展格局</h2>
+<h3 id="%E9%AB%98%E6%80%A7%E8%83%BD%E5%85%AC%E9%93%BE%E7%94%9F%E6%80%81">高性能公链生态</h3>
+<p><strong>1. DAG公链</strong></p>
+<p>以比特币为代表的区块链中, 除创世区块外, 每个区块有且只有一个前驱父区块和后继子区块, 区块之间构成单链.如果两个区块被同时提议, 将导致区块链出现分叉, 根据最长链原则, 最终只会保留一个区块在主链上, 而另一个被丢弃。这种结构使得针对区块链的账本操作只能够以串行化的方式进行。</p>
+<p>但在基于DAG的分布式账本中, 每个账本的基本单元可以引用一至多个前驱单元, 且可以被一个或多个后继单元同时引用。这种基于DAG的账本操作支持并发进行, 多个节点可以同时向账本中新增交易或区块单元, 从而极大地提高了系统吞吐量。</p>
+<p>代表性公链有Conflux，filecoin，avalanche</p>
+<p><strong>2. PE公链</strong></p>
+<p>像以太坊这这样的智能合约公链，顺序性一次执行一个交易，所有其他的交易置于暂停状态，直到前面交易执行完成，再顺序执行后面交易。</p>
+<p>PE并行处理，可以让交易在不同的处理核心分别处理，充分发挥硬件的并行特性，提升网路吞吐量，有效改进了交易确认的延迟。</p>
+<p>目前 PE 实现都需要更改智能合约。比特币类的 UTXO 模型天然支持并行，但是需要扩充才能支持智能合约，比如 Cardano 的 extended UTXO model。</p>
+<p>账户模型下，需要识别链的状态改变，避免避免不同交易之间的状态竞争。如 Solana 和 Sui 的要求交易明确声明它们修改的区块链状态部分。</p>
+<p><strong>3. 共识创新公链</strong></p>
+<p>活性和安全性前提下，在高性能的驱动下共识创新层出不穷。主流算法一般是基于 pos 和 bft 的结合，进一步流水线和并行处理提高共识效率。</p>
+<p>PBFT normal case 需要 3 阶段达成共识：</p>
+<table>
+<thead>
+<tr>
+<th>normal case 的消息类型</th>
+<th>格式</th>
+<th>补充说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pre-prepare</td>
+<td>&lt;pre-prepare, view, txn, proof&gt;</td>
+<td>主节点（Primary）广播预准备消息（Preprepare）到各副本节点（Replica）</td>
+</tr>
+<tr>
+<td>prepare</td>
+<td>&lt;prepare, view, hash(txn)&gt;</td>
+<td>该阶段是各个节点告诉其他节点我已经知道了这个消息，一旦某个节点收到了 包含n-f 个prepare消息（我们将使用QC也就是Quorum Certificate来指代，下同）则进入prepared状态</td>
+</tr>
+<tr>
+<td>commit</td>
+<td>&lt;commit, view, hash(txn)&gt;</td>
+<td>该阶段是各个节点以及知道其他节点知道了这个消息，一旦某个节点收到了n-f 个commit消息（QC）则进入committed状态</td>
+</tr>
+</tbody>
+</table>
+<p>View Change 也需要 3 各阶段：</p>
+<table>
+<thead>
+<tr>
+<th>normal case 的消息类型</th>
+<th>格式</th>
+<th>补充说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>view-change</td>
+<td>&lt;view_change, v+1, txn, view-change-proof&gt;</td>
+<td>从节点认为主节点有问题时，会向其它节点发送view-change消息，当前存活的节点编号最小的节点将成为新的主节点</td>
+</tr>
+<tr>
+<td>view-change-ack</td>
+<td>&lt;view-change-ack, v+1, (validTxn, validRound), prepare-proof&gt;</td>
+<td>其他节点收到 veiw-change 消息，如果检查 view-change 消息有效，停止低于 v+1 的协议，并回复 ack 给leader</td>
+</tr>
+<tr>
+<td>new-view</td>
+<td>&lt;pre-prepare, (txn, v+1), ack-proof&gt;</td>
+<td>Leader 等待 2f+1 个 ack 消息，并将2f+1 个 ack 消息打包记作 ack-proof，向其他节点广播并开启新的 veiw</td>
+</tr>
+</tbody>
+</table>
+<p>tendermint 共识算法，PBFT view change 的通信复杂度是 O(n3), tendermint 提出 lockedTxn 和 timeout 来解决 view-change 复杂度高的问题。但是一个区块的 commit 还是经过 pbft 的 3 个阶段，且只有上一次区块 commit 之后，下一个出下一个区块，进入新的 3 阶段 round。目前 cosmos 区块链采用 tendermint 共识算法。</p>
+<p>hotstuff 共识算法，视图以单调递增的方式不断切换。每个视图内都有一个唯一的主节点负责提案、收集和转发消息并生成QC，同时一个视图只能出一个区块。hotstuff 中如果我们对某一区块达成了两轮共识，在更换主节点时便能确定，主节点只需要基于最新的两轮共识节点产生新节点就是安全的，这个想法降低了在视图切换时候的通信复杂度。同时 hotstuff 中各个阶段流程都高度的相似，进而提出各个阶段以流水线方式进行处理交易，进一步简化消息类型，降低消息复杂度，提高共识效率。目前 sui 采用了基于 hotstuff 的演变算法 Tusk 共识算法，Aptos 采用了基于HotStuff共识算法演进算法 Aptos BFT共识算法。</p>
+<h3 id="%E5%88%86%E5%B1%82%E6%A8%A1%E5%9D%97%E5%8C%96%E7%94%9F%E6%80%81">分层模块化生态</h3>
+<p>高性能的底层公链，也不可能面面俱到，解决所有应用问题。从以太坊为代表区块链技术的发展和迭代看，链的分层和角色分工越来越清晰，Layer1做见证和结算层，Layer2的定位是计算和执行层。基于这种思路演化出了不同技术实现。</p>
+<p><strong>1. 状态通道</strong></p>
+<p>两个用户之间开辟一个区块链之外的通道，只有第一步开辟通道和最后一步关闭通道需要在区块链上发送交易。其他的交易在通道内完成，但是这些交易是有效的区块链交易，一方作恶，另一方随时可以将最新的通道交易发到区块链上赎回金额并惩罚作恶方。状态通道不能与不属于通道的人交易，另一个缺点是它们要求通道双方锁定流动性以实例化通道以防止恶意交易对手不会真正支付承诺资金的情况，同时需要定期监管网络的人，监督是否作恶。状态通道主要应用比特币的闪电网络，基于以太坊的Raiden，connext等。</p>
+<p><strong>2. sidechain</strong></p>
+<p>sidechain 侧链是与主区块链挂钩的独立区块链。单向挂钩，将主区块链的代币发送到不可用的地址来烧掉代币，然后在侧链上铸造等价的代币。双向挂钩，将主链上代币锁定到固定的地址，在侧链上铸造出代币或者在侧链上销毁代币，在主链上解锁一定的主链代币。侧链拥有主链转移过来的价值的同时拜托主链的共识等约束，但是没有主链的庞大网络和安全性。侧链的主要应用有比特币的侧链 Liquid Network，以太坊的侧链 polygon pos。</p>
+<p><strong>3. Plasma</strong></p>
+<p>Plasma 本质上是一系列在主区块链之外运行的智能合约。以太坊是主干，每条 Plasma 链都是一个分支，每个分支都被视为具有自己的区块链历史和计算的区块链。「 根区块链 」（即以太坊区块链）使用称为「 欺诈证明 」 的东西来强制 Plasma 链中状态的有效性。Plasma 链的运营商提交 Plasma 链上发生的转移的 Merkle 根。虽然每个 Plasma 链都可以使用自己的机制来验证交易，但它仍然使用以太坊区块链作为最终的真相仲裁者。因为区块链中只保存了hash值，一个可能的攻击是 operator 不将证明数据发给用户。这样子用户既无法控告 operator，智能合约又无法区分是谁在作恶，也就是数据可用性问题。</p>
+<p><strong>4. rollup</strong></p>
+<p>Rollups的思路跟Plasma相似，除了交易数据的hash值，我们还将交易的必要数据保存到main-chain中。这样给人的感觉就是一种“压缩”，这样 operator 一次可以向 main-chain 提交几百甚至上千的压缩后的“交易数据”。这些state相当于保存在main-chain的log数据。转账人的签名等数据放到链下operator那里。如何保证数据的一致性呢？为了这个一致性问题，出现了两种不同的技术路线，分别是Optimistic rollup和ZK rollup。前者以乐观的方式使用“challenge-response”的方式让智能合约来做裁判来解决争端。它的一个缺点是，用户要等待一周时间才能将钱从rollup中取出，因为需要留时间给可能存在的争端。后者需要operator在本地生成零知识证明（zkSNARK），智能合约通过验证该证明来判断数据是否一致，它的一个优点是，用户可以很快就能将钱从rollup中取出，但缺点是需要operator有很强的算力来生成zk证明。</p>
+<h3 id="%E5%A4%9A%E9%93%BE%E4%BA%92%E6%93%8D%E4%BD%9C%E7%94%9F%E6%80%81">多链互操作生态</h3>
+<p>跨链操作是通过连接相对独立的区块链系统来实现不同账本之间的可信互操作。</p>
+<p>随着跨链操作向着纵深发展，实现链上与链下协同、信息网络与价值网络融合成为跨链发展的新需求，区块链预言机（oracle）作为将数据从区块链外传输到区块链上的工具开始引起研究者的重视并发挥其作用。</p>
+<p><strong>1. 公证人机制</strong></p>
+<p>通过选择产生一个或多个作为共同依赖的公证人，负责监听来自不同链中的请求，在对请求进行验证后，执行该请求事务，然后在目标链执行约定的操作，实现对请求事务的响应。公证人是跨链操作的关键，可由跨链各方共同指定，也可通过密码学技术确定。公证人通过预设的共识算法决定对接收到的请求是否执行，如果执行将达成共识。目前较常用的是多重签名公证人机制和分布式多重签名公证人机制。</p>
+<p>多重签名公证人机制利用多重签名技术，由多位公证人同时对交易进行签名，当验证通过后跨链交易才能被确认。降低了单签名过程对公证人可靠性的依赖。</p>
+<p>分布式多重签名公证人机制改进了签名方式：首先，利用密码学技术生成系统中唯一的私钥 k ，并将 k 拆分成 key1( part1) ，key2( part2) ，…，keyn ( partn) 共 n 份；然后，从网络中随机选取 n 个互不信任的节点作为公证人，将拆分后的私钥段分发给每个公证人；最后，由这 n个公证人共同签名完成交易的验证和确认。</p>
+<p><strong>2. 中继</strong></p>
+<p>当某一平行链中的节点需要进行跨链操作时，该节点首先发起跨链操作请求，该请求报文将发送到中继链中的验证节点，经验证通过后再由中继链发送到目标平行链。</p>
+<p>中继方案基于轻客户端验证技术来实现，验证节点不需要跨链下载完整的账本，只需要执行能够实现轻客户端功能的智能合约，就能够跨链验证某笔交易是否存在。</p>
+<p><strong>3. 预言机</strong></p>
+<p>来自源链的智能合约调用预言机的消息路由器，该路由器将利用预言机的去中心化预言机网络安全地将消息发送到目标链，在目标链中，另一个消息路由器验证接收到的消息，通过验证后将其发送到目标智能合约，使智能合约能够通过跨链通信向其他区块链读写数据。</p>
+<h2 id="%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84">整体架构</h2>
+<h3 id="%E5%AD%90%E9%93%BE%E9%92%B1%E5%8C%85">子链钱包</h3>
+<ol>
+<li>
+<p>传统的插件钱包（metamask，coinbase），在玩游戏过程中，每次和合约交互都会调起插件钱包进行签名确认，大量的确认操作，严重验证影响游戏的体验。</p>
+</li>
+<li>
+<p>资产在layer1主链上面，在layer2链上的账户需要将原生代币兑换到layer2上才能支付发送合约调用交易的手续费。操作步骤较多，造成体验较差。</p>
+</li>
+</ol>
+<p><strong>解决方案</strong></p>
+<ol>
+<li>
+<p>鉴于目前链的架构。layer2链上的游戏具有一定的生命周期。在短暂的生命周期内构造一个临时私钥代替工作私钥签名。由于临时私钥在生命周期结束之后会销毁，安全性可以弱化。在游戏合约运行期间。弱化为不需要每次签名合约交易都弹出对话框进行确认。整个游戏运行期间在后台完成签名，实现用户的无感签名，带来游戏的丝滑体验。</p>
+</li>
+<li>
+<p>签名交易的手续费统一由游戏发行方提供，在代签名交易执行过程中将gas费用的扣款方更改为游戏的发行方。</p>
+</li>
+</ol>
+<p><strong>关键名词</strong></p>
+<p>游戏发行方：游戏合约的部署者，需要在layer2链上由足够的费用代付游戏合约调用的手续费。</p>
+<p>临时私钥：代替工作私钥签名的临时性私钥。具有一定的游戏阶段性。阶段开始时候生成，阶段结束销毁。只在阶段中具有有效性。</p>
+<p>工作私钥：游戏资产需要从layer1转移到layer2上面。在layer2上面具有有效游戏资产的账户私钥，即游戏过程中实际动账的账户私钥。</p>
+<p><strong>问题和平衡</strong></p>
+<ol>
+<li>游戏gas费代付，游戏玩家可能进行频繁重复操作，耗尽游戏发行方费用。</li>
+</ol>
+<p>游戏发行方，对游戏玩家也就是 workAddress 有一定授信额度，此额度可以设置为无限也就是持续代付，也可以设置为有限值，也就是有限额度代付。</p>
+<ol start="2">
+<li>避免游戏临时私钥权限过大，造成游戏资产不必要的损失。</li>
+</ol>
+<p>提出抽象的阶段概念，游戏合约更具自己业务需要是否要在合约方法内进行阶段的判断。</p>
+<p><strong>游戏合约基类</strong></p>
+<pre class="hljs"><code><div>contract GameBase {
+    // 获取合约发行方
+    function issuer() external view returns(address);
+
+    // 获取授信额度
+    function lineOfCredit() external view returns (uint256);
+}
+</div></code></pre>
+
+</body>
+</html>

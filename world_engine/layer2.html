@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>layer2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E6%B8%B8%E6%88%8F%E4%BA%8C%E5%B1%82">游戏二层</h1>
+<p>op Stack 的 World Engine</p>
+<h2 id="world-engine">World Engine</h2>
+<p>World Engine 是一个分片的 Layer2 区块链 SDK。</p>
+<p>分片设计是 World Engine 的一大创新，能够使游戏开发者能够将其游戏负载分布到不同的分片上，其灵感来自计算密集型大型多人在线（MMO）游戏的服务器架构。</p>
+<p>一条 World Engine 链可以根据需求调整其吞吐量，与开发商或发行商同步增长。</p>
+<p>World Engine的分片架构也避免了通过启动另一个单独的 rollup 来扩展时所带来的互操作性/平台碎片化问题。</p>
+<p>World Engine 的分片架构可以避免互操作性和平台碎片化问题，以及允许游戏执行（游戏分片）与智能合约执行（EVM 分片）分离，在保持高吞吐量游戏服务器性能的同时，保持区块链的互操作性能力。</p>
+<p>World Engine EVM 基础分片为玩家和开发者提供了一个中心场所来构建用户生成内容和平台，这些内容和平台可以通过 Argus Labs 分片路由器系统与游戏分片无缝互操作。</p>
+<p>EVM 分片的功能类似于 EVM Rollup，允许像使用以太坊一样使用所有开发人员工具、钱包和库，还借助 Berachain 开发的高性能模块化 EVM 框架 Polaris 通过其状态预编译和插件系统进行定制。</p>
+<p>Berachain 开发的高性能模块化 EVM 框架 Polaris，World Engine的 EVM 分片可以通过其有状态的预编译和插件系统进行富有表现力的定制，进而实现一些实用的功能，如为用户补贴 gas，甚至完成一些疯狂的设想，比如将智能合约进行游戏化部署。</p>
+<p>Cardinal 是一个高性能的游戏分片，能够处理性能密集型游戏的工作负载。Cardinal 的实体-组件-系统（ECS）架构为之前没有加密游戏开发经验的开发者提供了一个熟悉的开发环境。</p>
+<p>Cardinal 可以通过客户端库与现有的游戏引擎（如 Unity 和 Unreal）无缝集成；不再需要处理复杂的区块链集成问题。</p>
+<h3 id="world-cli">world-cli</h3>
+<p>world-cli 工具用于创建、管理和部署 Cardinal 游戏分片项目。</p>
+<pre class="hljs"><code><div>world-cli cardinal create [directory] //Create a World Engine game shard based on https://github.com/Argus-Labs/starter-game-template.
+
+world-cli cardinal start ... // start the following Docker services: Cardinal (Core game logic), Nakama (Relay)
+</div></code></pre>
+<h3 id="starter-game-template">starter-game-template</h3>
+<p>游戏模版，使用 Cardinal 和 Nakama 作为帐户抽象和交易中继器构建的示例游戏分片。</p>
+<p>集成了 Cardinal 源码。</p>
+<pre class="hljs"><code><div>├── component
+│   ├── health.go
+│   └── player.go
+├── config.go
+├── Dockerfile
+├── game
+│   └── constants.go
+├── go.mod
+├── go.sum
+├── main.go
+├── query
+│   └── constant.go
+├── system
+│   ├── system_attack.go
+│   ├── system_player_spawner.go
+│   └── system_regen.go
+├── tx
+│   ├── tx_attack_player.go
+│   └── tx_create_player.go
+└── utils
+    └── world.go
+</div></code></pre>
+<p>实质依赖 world-engine</p>
+<pre class="hljs"><code><div>pkg.world.dev/world-engine/cardinal v0.1.48-alpha.0.20231108182349-d63eaaae7de1
+pkg.world.dev/world-engine/chain v0.1.12-alpha // indirect
+pkg.world.dev/world-engine/rift v0.0.5 // indirect
+pkg.world.dev/world-engine/sign v0.1.10-alpha // indirect
+</div></code></pre>
+<h3 id="world-engine">world-engine</h3>
+<p>汇总通过一个特殊的 gRPC 服务器进行扩展，游戏分片可以连接到该服务器，以便向基本分片提交和存储交易。</p>
+<p>汇总服务用 cosmos SDK 实现的链。</p>
+<h3 id="%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84-tick-rate">可配置的 tick rate</h3>
+<p>Cardinal 的实体-组件-系统（ECS）架构</p>
+<p><img src="./images/ECS.png" alt="avatar"></p>
+<p>cardinal 游戏分片中，会有可配置定时器 <code>w.implWorld.StartGameLoop(context.Background(), w.tickChannel, w.tickDoneChannel)</code>  启动定时任务。</p>
+<pre class="hljs"><code><div>func (w *World) Tick(_ context.Context) error {
+	nullSystemName := &quot;No system is running.&quot;
+	nameOfCurrentRunningSystem := nullSystemName
+	defer func() {
+		if panicValue := recover(); panicValue != nil {
+			w.Logger.Error().Msgf(&quot;Tick: %d, Current running system: %s&quot;, w.tick, nameOfCurrentRunningSystem)
+			panic(panicValue)
+		}
+	}()
+	startTime := time.Now()
+	tickAsString := strconv.FormatUint(w.tick, 10)
+	w.Logger.Info().Str(&quot;tick&quot;, tickAsString).Msg(&quot;Tick started&quot;)
+	if !w.stateIsLoaded {
+		return errors.New(&quot;must load state before first tick&quot;)
+	}
+	txQueue := w.txQueue.CopyTransactions()
+
+	if err := w.TickStore().StartNextTick(w.registeredTransactions, txQueue); err != nil {
+		return err
+	}
+
+	for i, sys := range w.systems {
+		nameOfCurrentRunningSystem = w.systemNames[i]
+		wCtx := NewWorldContextForTick(w, txQueue, w.systemLoggers[i])
+		err := sys(wCtx)
+		nameOfCurrentRunningSystem = nullSystemName
+		if err != nil {
+			return err
+		}
+	}
+	if w.eventHub != nil {
+		// world can be optionally loaded with or without an eventHub. If there is one, on every tick it must flush events.
+		w.eventHub.FlushEvents()
+	}
+	if err := w.TickStore().FinalizeTick(); err != nil {
+		return err
+	}
+	w.setEvmResults(txQueue.GetEVMTxs())
+	w.tick++
+	w.receiptHistory.NextTick()
+	elapsedTime := time.Since(startTime)
+
+	var logEvent *zerolog.Event
+	message := &quot;tick ended&quot;
+	if elapsedTime &gt; warningThreshold {
+		logEvent = w.Logger.Warn()
+		message += fmt.Sprintf(&quot;, (warning: tick exceeded %dms)&quot;, warningThreshold.Milliseconds())
+	} else {
+		logEvent = w.Logger.Info()
+	}
+	logEvent.
+		Int(&quot;tick_execution_time&quot;, int(elapsedTime.Milliseconds())).
+		Str(&quot;tick&quot;, tickAsString).
+		Msg(message)
+	return nil
+}
+</div></code></pre>
+<h3 id="%E6%89%A7%E8%A1%8C%E5%88%86%E7%89%87">执行分片</h3>
+<p><img src="./images/shard.jpg" alt="avatar"></p>
+<p>共享定序器在打包区块时，将交易路由到对应的分区（namespace）</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(app *App)</span> <span class="hljs-title">FinalizeBlockHook</span><span class="hljs-params">(ctx sdk.Context, _ *types.RequestFinalizeBlock)</span> <span class="hljs-title">error</span></span> {
+	app.Logger().Info(<span class="hljs-string">"running finalize block"</span>)
+	txs := app.ShardSequencer.FlushMessages()
+	<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(txs) &gt; <span class="hljs-number">0</span> {
+		app.Logger().Info(<span class="hljs-string">"flushed messages from game shard. Executing..."</span>)
+		handler := app.MsgServiceRouter().Handler(txs[<span class="hljs-number">0</span>])
+		<span class="hljs-keyword">for</span> _, tx := <span class="hljs-keyword">range</span> txs {
+			_, err := handler(ctx, tx)
+			<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+				<span class="hljs-keyword">return</span> err
+			}
+		}
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</div></code></pre>
+<pre class="hljs"><code><div>interface IRouter {
+    function sendMessage(bytes memory message, string memory messageID, string memory namespace) external returns (bool);
+
+    function messageResult(string memory txHash) external returns (bytes memory, string memory, uint32);
+
+    function query(bytes memory request, string memory resource, string memory namespace)
+        external
+        returns (bytes memory);
+}
+</div></code></pre>
+<p>预编译合约 <code>world_engine_router</code> 实现了 router.sol 合约方法 <code>SendMessage, MessageResult, Query</code></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *Contract)</span> <span class="hljs-title">SendMessage</span><span class="hljs-params">(
+	ctx context.Context,
+	message []<span class="hljs-keyword">byte</span>,
+	messageID <span class="hljs-keyword">string</span>,
+	namespace <span class="hljs-keyword">string</span>,
+)</span> <span class="hljs-params">(<span class="hljs-keyword">bool</span>, error)</span></span> {
+	pCtx := vm.UnwrapPolarContext(ctx)
+
+    <span class="hljs-comment">// 根据 namespace 获取对应的客户端发送消息到对应的分区执行</span>
+	err := c.rtr.SendMessage(ctx, namespace, pCtx.MsgSender().String(), messageID, message)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>, err
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>, <span class="hljs-literal">nil</span>
+}
+</div></code></pre>
+
+</body>
+</html>
