@@ -1,0 +1,112 @@
+enode://106f3bfff30bd9b1bf7773872baf4216dcd75b1195d679f4ff0f7e22356c42b6cba7474d083f7590244a6378747ca5fdd780e1b3e5c3320b6ffdf5bd509a6ecd@127.0.0.1:18000
+
+../bubble/build/bin/bubble  --datadir data/  --port 18000 --nodekey nodekey --cbft.blskey blskey --http --http.addr 0.0.0.0 --http.port 18001 --http.api web3,bub,txpool,miner,net,admin,personal,debug --ws --ws.addr 0.0.0.0 --ws.port 18002 --ws.api web3,bub,txpool,net,admin,personal,debug --ws.origins "*" --rpc.txfeecap 0 --allow-insecure-unlock --txpool.nolocals --db.nogc --debug --verbosity 4 --bootnodes "enode://106f3bfff30bd9b1bf7773872baf4216dcd75b1195d679f4ff0f7e22356c42b6cba7474d083f7590244a6378747ca5fdd780e1b3e5c3320b6ffdf5bd509a6ecd@127.0.0.1:18000"
+
+../bubble/build/bin/bubble --datadir ./data init genesis-1node.json
+
+主节点
+/home/qiliu/wht/bubble/build/bin/bubble --datadir ./data init genesis-1node.json
+/home/qiliu/wht/bubble/build/bin/bubble  --datadir data/  --port 18000 --nodekey nodekey --cbft.blskey blskey --http --http.addr 0.0.0.0 --http.port 18001 --http.api web3,bub,txpool,miner,net,admin,personal,debug --ws --ws.addr 0.0.0.0 --ws.port 18002 --ws.api web3,bub,txpool,net,admin,personal,debug --ws.origins "*" --rpc.txfeecap 0 --allow-insecure-unlock --txpool.nolocals --db.nogc --debug --verbosity 4 --bootnodes "enode://106f3bfff30bd9b1bf7773872baf4216dcd75b1195d679f4ff0f7e22356c42b6cba7474d083f7590244a6378747ca5fdd780e1b3e5c3320b6ffdf5bd509a6ecd@127.0.0.1:18000"
+
+微节点
+/home/qiliu/wht/backup/bubble/build/bin/bubble --datadir ./data init genesis-node.json
+/home/qiliu/wht/backup/bubble/build/bin/bubble  --datadir data/  --port 18000 --nodekey nodekey --cbft.blskey blskey --http --http.addr 0.0.0.0 --http.port 18001 --http.api web3,bub,txpool,miner,net,admin,personal,debug --ws --ws.addr 0.0.0.0 --ws.port 18002 --ws.api web3,bub,txpool,net,admin,personal,debug --ws.origins "*" --rpc.txfeecap 0 --allow-insecure-unlock --txpool.nolocals --db.nogc --debug --verbosity 4 --bootnodes "enode://10a01bdba7df28bcbbef3053ef07317d27286d0c84e9c0cdf3408068107db4a998d92f97d9fd436ded723975669f5af0b2f57042542bfef58354ad39bf94586b@127.0.0.1:18000" 1>file.out 2>&1
+
+以太坊
+/home/qiliu/wht/go-ethereum/build/bin/geth --datadir ./data init genesis.json
+/home/qiliu/wht/go-ethereum/build/bin/geth --rpc --rpcaddr "0.0.0.0" --port 30303 --rpcapi "web3,personal,admin,db,net,eth,miner,rpc,txpool" --rpccorsdomain "*" --datadir ./data --networkid 100 --ws --wsaddr="0.0.0.0" --wsorigins "*" --wsapi "web3,personal,admin,db,net,eth,miner,rpc,txpool" --nodiscover --gcmode archive console
+
+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
+git config --global user.name "jatel"
+
+git config --global --unset http.proxy
+git config --global http.proxy http://192.168.31.175:7890
+
+git clone http://192.168.31.12:10015/bubble/bubble.git --recursive
+git config --global  --list
+git submodule update --init --recursive
+go build .\cmd\bubble\
+https://user.by.icu/clientarea.php
+
+ssh qiliu@192.168.31.115
+https://app.tuta.com/mail/
+veritas
+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
+veritasmomo@tutanota.com
+0420
+1938
+f27a
+e888
+10be
+64df
+78e9
+68e6
+75f4
+a2b5
+158c
+f497
+2c3b
+f528
+c658
+a8e1
+
+https://blog.csdn.net/HW140701/article/details/123479767
+https://www.dongchuanmin.com/vscode/5964.html
+
+/home/qiliu/wht/go-ethereum/build/bin/abigen --abi Game.json --pkg game --out game.go
+
+func (cbft *Cbft) findExecutableBlock() {
+func (cbft *Cbft) fetchBlock(id string, hash common.Hash, number uint64, qc *ctypes.QuorumCert) 
+func (bcc *BlockChainCache) Execute(block *types.Block, parent *types.Block) error {
+func (bcc *BlockChainCache) executeLoop()
+func (p *StateProcessor) Process(block *types.Block, statedb *state.StateDB
+func applyTransaction(msg types.Message, config *params.ChainConfig,
+func ApplyMessage(evm *vm.EVM, msg Message, gp *GasPool) (*ExecutionResult, error)
+func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
+
+https://pmg.csail.mit.edu/papers/osdi99.pdf
+https://arxiv.org/pdf/1803.05069.pdf
+
+
+50000000000
+
+func (pm *ProtocolManager) handleMsg(p *peer) error {
+applyTransaction(msg types.Message, config *params.ChainConfig,
+
+
+func (w *worker) commitNewWork(interrupt *int32, noempty bool, timestamp int64, commitBlock *types.Block, blockDeadline time.Time) error {
+func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
+func (pool *TxPool) promoteExecutables(accounts []common.Address) []*types.Transaction {
+func (s *PublicTransactionPoolAPI) SendRawTransaction(ctx context.Context, encodedTx hexutil.Bytes) (common.Hash, error) {
+
+
+export GOPATH='/home/qiliu/go'
+
+
+
+
+
+https://drops.dagstuhl.de/storage/00lipics/lipics-vol125-opodis2018/LIPIcs.OPODIS.2018.16/LIPIcs.OPODIS.2018.16.pdf
+proof of lock
+
+李升林
+https://www.aicoin.com/article/173287.html
+https://github.com/PlatONnetwork/confidential-transaction/wiki/ConfidentialTransaction#transfer-%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B
+
+https://forum.latticex.foundation/t/topic/6385
+https://blog.csdn.net/mutourend/article/details/128200838
+
+
+零知识：
+https://secbit.io/blog/post/
+https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/
+
+
+https://snowolf0620.xyz/index.php/zkp/645.html
+
+https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8746079
+
+https://blog.csdn.net/qq_34793644/article/details/132707829
+
+博客：
+http://liwuzhi.art/?paged=2
